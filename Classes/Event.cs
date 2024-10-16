@@ -10,8 +10,7 @@ public abstract class Event
         Name = name;
         Location = location;
     }
-
-    // Abstract method for displaying details
+    
     public abstract void DisplayDetails();
 }
 

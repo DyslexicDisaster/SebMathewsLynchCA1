@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SebMathewsLynchCA1.Classes
 {
-    public class Race : Event
+    public class Race : Event, IHorseManager
     {
         public DateTime StartTime { get; set; }
         public List<Horse> Horses { get; set; }
@@ -16,8 +16,7 @@ namespace SebMathewsLynchCA1.Classes
             StartTime = startTime;
             Horses = new List<Horse>();
         }
-
-        // Override to display race details
+        
         public override void DisplayDetails()
         {
             Console.WriteLine($"Race: {Name}, Start Time: {StartTime}");
@@ -26,8 +25,7 @@ namespace SebMathewsLynchCA1.Classes
                 Console.WriteLine($"  Horse: {horse.Name}");
             }
         }
-
-        // Add a horse to the race
+        
         public void AddHorse(Horse horse)
         {
             Horses.Add(horse);

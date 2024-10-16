@@ -1,13 +1,20 @@
 ﻿namespace SebMathewsLynchCA1.Classes;
 
-public class RacingEvent : Event
+public class RaceEvent : Event, IRaceManager
 {
     public List<Race> Races { get; set; }
+    public int raceCount;
 
-    public RacingEvent(string name, string location) : base(name, location)
+    public RaceEvent(string name, string location) : base(name, location)
     {
         Races = new List<Race>();
     }
+    
+    public void AddRace(Race race)
+    {
+        Races.Add(race);
+    }
+
     
     public override void DisplayDetails()
     {
@@ -16,10 +23,5 @@ public class RacingEvent : Event
         {
             race.DisplayDetails(); 
         }
-    }
-    
-    public void AddRace(Race race)
-    {
-        Races.Add(race);
     }
 }
