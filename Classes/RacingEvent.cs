@@ -8,11 +8,14 @@ public class RaceEvent : Event, IRaceManager
     public RaceEvent(string name, string location) : base(name, location)
     {
         Races = new List<Race>();
+        raceCount = 0;
     }
     
     public void AddRace(Race race)
     {
-        Races.Add(race);
+        raceCount++;
+        
+        
     }
 
     
