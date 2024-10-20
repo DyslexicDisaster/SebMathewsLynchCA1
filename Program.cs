@@ -25,16 +25,16 @@ namespace SebMathewsLynchCA1
                 switch (choice)
                 {
                     case "1":
-                        // Call method to create race event
+                        CreateRaceEvent(raceEvents);
                         break;
                     case "2":
-                        // Call method to add race to event
+                        AddRaceToEvent(raceEvents);
                         break;
                     case "3":
-                        // Call method to add horse to race
+                        AddHorseToRace(raceEvents);
                         break;
                     case "4":
-                        // Call method to display events
+                        ViewRaceEvents(raceEvents);
                         break;
                     case "0":
                         exit = true;
@@ -43,6 +43,67 @@ namespace SebMathewsLynchCA1
                         Console.WriteLine("Invalid option. Please try again.");
                         break;
                 }
+            }
+        }
+        static void CreateRaceEvent(List<RaceEvent> raceEvents)
+        {
+            string eventName = Validators.GetValidString("Enter Event Name: ");
+            string location = Validators.GetValidString("Enter Location: ");
+            int numberOfRaces = Validators.GetValidInteger("Enter Number of Races: ");
+
+            RaceEvent newEvent = new RaceEvent(eventName, location);
+            raceEvents.Add(newEvent);
+            Console.WriteLine("Race event created successfully!");
+        }
+        static void AddRaceToEvent(List<RaceEvent> raceEvents)
+        {
+            string eventName = Validators.GetValidString("Enter the name of the race event: ");
+            var raceEvent = raceEvents.FirstOrDefault(e => e.Name == eventName);
+            if (raceEvent == null)
+            {
+                Console.WriteLine("Event not found!");
+                return;
+            }
+
+            string raceName = Validators.GetValidString("Enter Race Name (or leave blank for default name): ");
+            DateTime startTime = Validators.GetValidDate("Enter the start time of the race (e.g., 12/31/2024 14:00): ");
+        
+            Race newRace = new Race(raceName, startTime);
+            raceEvent.AddRace(newRace);
+            Console.WriteLine("Race added successfully!");
+        }
+
+        static void AddHorseToRace(List<RaceEvent> raceEvents)
+        {
+            string eventName = Validators.GetValidString("Enter the name of the race event: ");
+            var raceEvent = raceEvents.FirstOrDefault(e => e.Name == eventName);
+            if (raceEvent == null)
+            {
+                Console.WriteLine("Event not found!");
+                return;
+            }
+
+            string raceName = Validators.GetValidString("Enter the race name: ");
+            var race = raceEvent.Races.FirstOrDefault(r => r.Name == raceName);
+            if (race == null)
+            {
+                Console.WriteLine("Race not found!");
+                return;
+            }
+
+            string horseName = Validators.GetValidString("Enter Horse Name: ");
+            DateTime dob = Validators.GetValidDate("Enter Horse Date of Birth (e.g., 01/01/2020): ");
+
+            Horse newHorse = new Horse(horseName, dob);
+            race.AddHorse(newHorse);
+            Console.WriteLine("Horse added to race successfully!");
+        }
+
+        static void ViewRaceEvents(List<RaceEvent> raceEvents)
+        {
+            foreach (var raceEvent in raceEvents)
+            {
+                raceEvent.DisplayDetails();
             }
         }
     }
