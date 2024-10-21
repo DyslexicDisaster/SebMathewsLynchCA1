@@ -92,7 +92,7 @@ namespace SebMathewsLynchCA1
             }
 
             string horseName = Validators.GetValidString("Enter Horse Name: ");
-            DateTime dob = Validators.GetValidDate("Enter Horse Date of Birth (e.g., 01/01/2020): ");
+            DateTime dob = Validators.GetValidHorseDOB("Enter Horse Date of Birth (e.g., 01/01/2020): ");
 
             Horse newHorse = new Horse(horseName, dob);
             race.AddHorse(newHorse);

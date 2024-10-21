@@ -9,7 +9,7 @@ public class Validators
         {
             Console.Write(prompt);
             string input = Console.ReadLine();
-            if (value > 0)
+            if (int.TryParse(input, out value) && value > 0)
             {
                 return value;
             }
@@ -27,9 +27,17 @@ public class Validators
         {
             Console.Write(prompt);
             string input = Console.ReadLine();
+            
             if (DateTime.TryParse(input, out value))
             {
-                return value;
+                if (value > DateTime.Now)
+                {
+                    return value;  
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input. Please enter a date in the future.");
+                }
             }
             else
             {
@@ -51,6 +59,34 @@ public class Validators
             else
             {
                 Console.WriteLine("Invalid input. Please enter a non-empty value.");
+            }
+        }
+    }
+
+    public static DateTime GetValidHorseDOB(string prompt)
+    {
+        DateTime dob;
+        while (true)
+        {
+            Console.Write(prompt);
+            string input = Console.ReadLine();
+
+            if (DateTime.TryParse(input, out dob))
+            {
+                // Validation: Ensure the horse's DOB is not in the future and not more than 30 years ago
+                if (dob <= DateTime.Now && dob >= DateTime.Now.AddYears(-30))
+                {
+                    return dob;
+                }
+                else
+                {
+                    Console.WriteLine(
+                        "Invalid date. The horse must be born within the last 30 years and not in the future.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input. Please enter a valid date (e.g., 01/01/2015).");
             }
         }
     }
